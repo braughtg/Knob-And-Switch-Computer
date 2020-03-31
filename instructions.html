@@ -1,0 +1,135 @@
+
+<!-- saved from url=(0066)http://users.dickinson.edu/~braught/kands/KandS2/instructions.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>K&amp;S Model 2 Computer - Machine Language Instruction Set</title>
+</head>
+<body>
+<center>
+<font color="blue" size="+3"><b>
+Knob &amp; Switch Computer Company
+</b>
+<br>
+<font color="black" size="+2">
+K &amp; S Model 2 - Assembly &amp; Machine Language Instruction Set
+</font>
+</font>
+</center>
+<br><br><hr>
+<br>
+
+<table bgcolor="white" border="2" cellpadding="10" cellspacing="5">
+<tbody><tr><td colspan="4"><b>Data Movement Instructions:</b></td></tr>
+
+<tr><td>Assembly Language Instruction:</td><td>Example:</td><td>Meaning:</td><td>Machine Language Instruction:</td></tr>
+<tr><td>
+<tt>LOAD [REG] [MEM]<br>
+<tt>STORE [MEM] [REG]<br>
+<tt>MOVE [REG1] [REG2]
+</tt></tt></tt></td>
+
+<td>
+<tt>LOAD R2 13<br>
+<tt>STORE 8 R3<br>
+<tt>MOVE R2 R0
+</tt></tt></tt></td>
+
+<td>
+<tt>R2 = M[13]<br>
+<tt>M[8] = R3<br>
+<tt>R2 = R0
+</tt></tt></tt></td>
+
+<td>
+<tt>1 000 0001 0 RR MMMMM<br>
+<tt>1 000 0010 0 RR MMMMM<br>
+<tt>1 001 0001 0000 RR RR
+</tt></tt></tt></td></tr>
+
+<tr><td colspan="4"><b>Arithmetic and Logic Instructions:</b></td></tr>
+
+<tr><td>Instruction:</td><td>Example:</td><td>Meaning:</td><td>Machine Language Instruction:</td></tr>
+<tr><td>
+<tt>ADD [REG1] [REG2] [REG3]<br>
+<tt>SUB [REG1] [REG2] [REG3]<br>
+<tt>AND [REG1] [REG2] [REG3]<br>
+<tt>OR [REG1] [REG2] [REG3]<br>
+</tt></tt></tt></tt></td>
+
+<td>
+<tt>ADD R3 R2 R1<br>
+<tt>SUB R3 R1 R0<br>
+<tt>AND R0 R3 R1<br>
+<tt>OR R2 R2 R3
+</tt></tt></tt></tt></td>
+
+<td>
+<tt>R3 = R2 + R1<br>
+<tt>R3 = R1 - R0<br>
+<tt>R0 = R3 &amp; R1<br>
+<tt>R2 = R2 | R3
+</tt></tt></tt></tt></td>
+
+<td>
+<tt>1 010 0001 00 RR RR RR<br>
+<tt>1 010 0010 00 RR RR RR<br>
+<tt>1 010 0011 00 RR RR RR<br>
+<tt>1 010 0100 00 RR RR RR
+</tt></tt></tt></tt></td>
+</tr>
+
+<tr><td colspan="4"><b>Branching Instructions:</b></td></tr>
+
+<tr><td>Instruction:</td><td>Example:</td><td>Meaning:</td><td>Machine Language Instruction:</td></tr>
+<tr><td>
+<tt>BRANCH [MEM]<br>
+<tt>BZERO [MEM]<br>
+<tt>BNEG [MEM]
+</tt></tt></tt></td>
+
+<td>
+<tt>BRANCH 10<br>
+<tt>BZERO 2<br>
+<tt>BNEG 7
+</tt></tt></tt></td>
+
+<td>
+<tt>PC = 10<br>
+<tt>PC = 2 IF ALU RESULT IS ZERO<br>
+<tt>PC = 7 IF ALU RESULT IS NEGATIVE
+</tt></tt></tt></td>
+
+<td>
+<tt>0 000 0001 000 MMMMM<br>
+<tt>0 000 0010 000 MMMMM<br>
+<tt>0 000 0011 000 MMMMM
+</tt></tt></tt></td>
+</tr>
+
+<tr><td colspan="4"><b>Other Instructions:</b></td></tr>
+
+<tr><td>Instruction:</td><td>Example:</td><td>Meaning:</td><td>Machine Language Instruction:</td></tr>
+<tr><td>
+<tt>NOP<br>
+<tt>HALT
+</tt></tt></td>
+
+<td>
+<tt>NOP<br>
+<tt>HALT
+</tt></tt></td>
+
+<td>
+<tt>Do nothing.<br>
+<tt>Halt the machine.
+</tt></tt></td>
+
+<td>
+<tt>0000 0000 0000 0000<br>
+<tt>1111 1111 1111 1111
+</tt></tt></td>
+</tr>
+
+</tbody></table>
+
+
+</body></html>

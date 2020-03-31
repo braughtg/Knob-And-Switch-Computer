@@ -1,0 +1,79 @@
+<HTML>
+<HEAD>
+<Title>The Knob & Switch Computer</Title>
+<script>
+function openIt(theURL,w,h)
+{
+  window.open(theURL,"KS", "width=" + w + ",height=" + h);
+}
+</script>
+</HEAD>
+
+<BODY BGColor='#FFFFFF' text='#000000' link='#473C8B' vlink='#757575'>
+
+<hr>
+<center>
+<font size=+3 color='blue'>
+<b>
+The Knob & Switch Computer:<br>
+</font>
+<font size=+2 color='blue'>
+An Incremental Machine Simulator<br>
+for Breadth-Based CS Courses 
+</b>
+</font>
+<br><br>
+<font size=+2>
+Grant Braught<br>
+</font>
+Department of Mathematics and Computer Science<br>
+Dickinson College
+</center>
+<hr>
+<br><br>
+
+
+
+<font size=+1 color='#006400'>
+<b>General Information:</b>
+</font>
+<br><br>
+<UL>
+<p>The Knob & Switch Computer uses an intuitive metaphore and an incremental approach to introduce introductory CS students to the big ideas in computer organization.  Students are introduced to a datapath containing an ALU and 4 registers. The ALU operation and the registers on which it will operate are selected by rotating (clicking) a collection of knobs. A second increment adds a main memory unit to the datapath along with switches that control the flow of data between the CPU and the memory. The third increment adds a microprogram control unit that allows the machine to be programmed using 1's and 0's that correspond to the knob and switch settings.  The final increment turns the K&S into a complete stored program computer that executes assembly/machine language programs stored in its main memory unit.
+ 
+</UL>
+<font size=+1 color='#006400'>
+<b>The Knob & Switch Computer Simulations:</b>
+</font>
+<br><br>
+
+<UL>
+<p><i>NOTE: The following links open a new browser window and work best if your browser's default fonts are set to 12 point.</i>
+<br><br>
+<DL>
+<DT><a href="javascript:openIt('datapath.html',525,600);">The K&S Datapath Simulation</a>
+<DD>This simulator introduces the K&S datapath.  The key features are the knobs and switches that can be set to control the operands, operations and storage of the result.
+<br><br>
+<DT><a href="javascript:openIt('dpandmem.html',800,600);">The K&S Datapath Simulation with Main Memory</a>
+<DD>This simulator adds a main memory unit to the datapath to increase the storage capacity of the machine.  The key features are that memory accesses require more time than register accesses, and that memory and ALU operations happen in parallel even though one of them will be ignored.
+<br><br>
+<DT><a href="javascript:openIt('micromachine.html',800,600);">The K&S with Microprogramming</a>
+<DD>This simulator makes the K&S programmable by adding a microprogram store. The concept of microprogramming is intuitive in that the bits of each microprogram simply encocde the positions of the knobs and switches.
+<br><br>
+<DT><a href="javascript:openIt('machine.html',800,600);">The Complete K&S Model 2 Computer</a>
+<dd>This simulator is a complete stored program computer.  It uses a control unit that translates machine language commands into the microinstructions that carry out the operation.  Instructions entered in main memory locations in assembly language are automatically assembled into machine language. The assembly / machine language instructions are documented on the: <a href="instructions.html">Assembly/Machine Language Programming Card</a>.
+</DL>
+</UL>
+
+<br>
+<hr>
+<font size=-2>
+<script language="JavaScript">
+          <!---//hide script from old browsers
+          document.write( "This document was last updated "+ document.lastModified + "<br><br>" );
+          //end hiding contents --->
+          </script>
+</font>
+
+</BODY>
+</HTML>
