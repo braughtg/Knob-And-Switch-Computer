@@ -8,11 +8,11 @@
 
 // Cache the images so they are available:
 var imageNames = new Array ("bendBlue.gif","bendRed.gif",
-                           "bendClosedBlue.gif", "bendOpenBlue.gif", 
+                           "bendClosedBlue.gif", "bendOpenBlue.gif",
 			   "bendClosedRed.gif",
 			   "downArrowClosedBlue.gif", "downArrowOpenBlue.gif",
 			   "downArrowClosedRed.gif",
-			   "saluDial0.gif", "saluDial1.gif", 
+			   "saluDial0.gif", "saluDial1.gif",
 			   "saluDial2.gif", "saluDial3.gif",
 			   "shortDownArrowBlue.gif","shortDownArrowRed.gif",
 			   "sregDial0.gif", "sregDial1.gif",
@@ -21,7 +21,7 @@ var imageNames = new Array ("bendBlue.gif","bendRed.gif",
 			   "upArrowClosedRed.gif",
 			   "upArrowBlue.gif", "upArrowRed.gif",
 			   "../microprog/loadArrowGreen.gif",
-			   "../control/downArrowBlue.gif", 
+			   "../control/downArrowBlue.gif",
 			   "../control/downArrowRed.gif",
 			   "../control/leftArrowBlue.gif",
 			   "../control/leftArrowRed.gif",
@@ -31,8 +31,8 @@ var imageNames = new Array ("bendBlue.gif","bendRed.gif",
 var imageObj = new Array(imageNames.length);
 for (var i=0; i<imageNames.length; i++) {
     imageObj[i] = new Image();
-    imageObj[i].src = imageNames[i]; 
-}  
+    imageObj[i].src = imageNames[i];
+}
 // end cache stuff.
 
 setGlobals();
@@ -58,7 +58,7 @@ function setGlobals()
   ALU_NEGATIVE = false;
   ALU_UNSIGNED_OVERFLOW = false;
   ALU_SIGNED_OVERFLOW = false;
- 
+
   registerBaseTwoValues = new Array(11);
   RO_INDEX = 0;  ABUS_INDEX = 4;  ALUA_INDEX = 8;
   R1_INDEX = 1;  BBUS_INDEX = 5;  ALUB_INDEX = 9;
@@ -77,7 +77,7 @@ function updateAllRegisters(newBase)
   document.datapath.BBus.value = getNumber(registerBaseTwoValues[BBUS_INDEX],2,newBase,16);
   document.datapath.CBus.value = getNumber(registerBaseTwoValues[CBUS_INDEX],2,newBase,16);
   document.datapath.ALUA.value = getNumber(registerBaseTwoValues[ALUA_INDEX],2,newBase,16);
-  document.datapath.ALUB.value = getNumber(registerBaseTwoValues[ALUB_INDEX],2,newBase,16);  
+  document.datapath.ALUB.value = getNumber(registerBaseTwoValues[ALUB_INDEX],2,newBase,16);
   document.datapath.ALUC.value = getNumber(registerBaseTwoValues[ALUC_INDEX],2,newBase,16);
 
   if (WITH_MEMORY)
@@ -98,7 +98,7 @@ function initPage()
   document.datapath.negative.checked = false;
   document.datapath.uoverflow.checked = false;
   document.datapath.soverflow.checked = false;
-  
+
   updateAllRegisters(getNumberBase());
 }
 
@@ -140,7 +140,7 @@ function turnKnob(knobPrefix, knobName, knobInc)
 function toggleSwitch(theSwitch)
 {
   var newSrc, OC, newPos;
- 
+
   if (CHANGE_ENABLED)
   {
     oldSrc = document[theSwitch].src;
@@ -160,15 +160,15 @@ function toggleSwitch(theSwitch)
 function setSwitch(theSwitch,theState)
 {
   var newSrc, OC, BL;;
-  
+
   OC = document[theSwitch].src.indexOf("Closed");
   if (OC == -1)
     OC = document[theSwitch].src.indexOf("Open");
 
   BL = document[theSwitch].src.indexOf("Blue");
 
-  newSrc = document[theSwitch].src.substring(0,OC) + 
-           theState + 
+  newSrc = document[theSwitch].src.substring(0,OC) +
+           theState +
            document[theSwitch].src.substring(BL,document[theSwitch].src.length);
 
   document[theSwitch].src = newSrc;
@@ -186,8 +186,8 @@ function blinkIt(blinks, evenTimes, oddTimes, whenDone, blinkTime)
   }
 
   if (blinks != 0 && (!HALT_CYCLE || blinks % 2 != 0))
-    timeoutID = setTimeout("blinkIt(" + (blinks - 1) + 
-                           ",'" + evenTimes + "','" + oddTimes + 
+    timeoutID = setTimeout("blinkIt(" + (blinks - 1) +
+                           ",'" + evenTimes + "','" + oddTimes +
                            "','" + whenDone + "'," + blinkTime +
                            ");", blinkTime);
   else
@@ -206,7 +206,7 @@ function startInstructionCycle()
             'top.control.setPC()',
             'top.control.clearPC()',
             'instructionCycle2()',
-            BLINK_TIME);  
+            BLINK_TIME);
 }
 
 function instructionCycle2()
@@ -232,7 +232,7 @@ function instructionCycle3()
     blinkIt(NUM_BLINKS,
             'top.control.setIR();',
             'top.control.clearIR();',
-            'instructionCycle4()', 
+            'instructionCycle4()',
             BLINK_TIME);
 }
 
@@ -240,7 +240,7 @@ function instructionCycle4()
 {
   RESUME_HERE = "instructionCycle4();";
 
-  if (!HALT_CYCLE) 
+  if (!HALT_CYCLE)
     blinkIt(NUM_BLINKS,
             'top.control.setIRUpPCDownArrowBlue();',
             'top.control.setIRUpPCDownArrowRed();',
@@ -272,7 +272,7 @@ function instructionCycle6()
   if (!HALT_CYCLE)
   {
     theInst = getNumber(top.control.IR_VALUE,2,-1,16);
-    
+
     if(theInst.charAt(0) == 'B')
       startInstructionCycle();
     else if (theInst != "HALT")
@@ -286,7 +286,7 @@ function instructionCycle6()
 }
 
 // **********************************************
-// Functions for setting the controls based on the 
+// Functions for setting the controls based on the
 // micro-program or micro-instruction.
 //
 function setControls()
@@ -358,15 +358,15 @@ function loadABBusReg()
 }
 
 function setRegisters()
-{ 
+{
   var aRegIndex, bRegIndex;
 
   aRegIndex = getKnobSetting("AAddr");
-  document.datapath["R" + aRegIndex].value = 
+  document.datapath["R" + aRegIndex].value =
     getNumber(registerBaseTwoValues[aRegIndex],2,getNumberBase(),16);
 
   bRegIndex = getKnobSetting("BAddr");
-  document.datapath["R" + bRegIndex].value = 
+  document.datapath["R" + bRegIndex].value =
     getNumber(registerBaseTwoValues[bRegIndex],2,getNumberBase(),16);
 
   if(WITH_MEMORY)
@@ -382,7 +382,7 @@ function clearRegisters()
 
   bRegIndex = getKnobSetting("BAddr");
   document.datapath["R" + bRegIndex].value = "";
-  
+
   if(WITH_MEMORY)
     top.memory.clearSelectedAddress();
 }
@@ -444,7 +444,7 @@ function setABBusReg()
 
   document.datapath.BBus.value = getNumber(registerBaseTwoValues[BBUS_INDEX],
                                            2,getNumberBase(),16);
-  
+
   if(WITH_MEMORY)
     top.memory.setSelectedAddress();
 }
@@ -461,7 +461,7 @@ function clearABBusReg()
 function loadABBusRegEnd()
 {
   loadALUReg();
-} 
+}
 
 // *****************************************************
 // Functions for loading the ALU registers
@@ -584,7 +584,7 @@ function calculateALUResult()
     aluResultU = AU - BU;
     aluResultS = AS - BS;
   }
-  
+
   ALU_UNSIGNED_OVERFLOW = ((aluResultU > 65535) || (aluResultU < 0));
   ALU_SIGNED_OVERFLOW = ((aluResultS > 32767) || (aluResultS < -32768));
   ALU_ZERO = (aluResultS == 0);
@@ -655,7 +655,7 @@ function setBendBlue()
   {
     if (document.fromMemory.src.indexOf("Closed") != -1)
       document.fromMemory.src = "upArrowClosedBlue.gif";
-  
+
     if (document.bend.src.indexOf("Closed") != -1)
       document.bend.src = "bendClosedBlue.gif";
   }
@@ -723,7 +723,7 @@ function loadCBusRegEnd()
 // Functions for loading the Register bank
 //
 function loadRegisters()
-{  
+{
   RESUME_HERE = "loadRegisters();";
 
   if (!HALT_CYCLE)
@@ -792,7 +792,7 @@ function setRegister()
   if (WITH_MEMORY && document.toMemory.src.indexOf("Closed") != -1)
     setMMBus();
 
-  if (document.CArrow.src.indexOf("Closed") != -1 || !WITH_MEMORY) 
+  if (document.CArrow.src.indexOf("Closed") != -1 || !WITH_MEMORY)
   {
     cRegIndex = getKnobSetting("CAddr");
     document.datapath["R" + cRegIndex].value = getNumber(registerBaseTwoValues[cRegIndex],
@@ -907,23 +907,23 @@ function runLightClicked()
   {
     executeCycle();
   }
-  else 
-  { 
+  else
+  {
     stopCycle();
   }
 }
 
 function executeCycle()
-{ 
+{
   var i;
-   
+
 //  document.runLight.src = "runLightGreen.gif";
 
   if (document.datapath.runButton.value == "Execute") {
     document.datapath.runButton.value = "Halt";
 
     if (CHANGE_ENABLED)
-    {  
+    {
       CHANGE_ENABLED = false;
       HALT_CYCLE = false;
       MICRO_INST = 0;
@@ -934,7 +934,7 @@ function executeCycle()
       }
       else if (WITH_MICROPROG) {
         RESUME_HERE = "setControls();";
-        setControls(); 
+        setControls();
       }
       else {
         RESUME_HERE = "loadABBusReg();";
@@ -943,7 +943,7 @@ function executeCycle()
     }
   }
   else {
-    document.datapath.runButton.value = "Execute";  
+    document.datapath.runButton.value = "Execute";
     document.datapath.pauseButton.value = "Pause";
     RESUME_HERE = null;
     stopCycle();
@@ -995,7 +995,7 @@ function getBaseIndex(theBase)
     return 1;
   else if (theBase == 2)
     return 2;
-  else 
+  else
     return 0;
 }
 
@@ -1015,9 +1015,9 @@ function changeBase()
       if (WITH_CONTROL)
         top.control.location.reload();
 
-      updateAllRegisters(newNB);       
+      updateAllRegisters(newNB);
     }
-    
+
     PREVIOUS_NUMBERBASE = newNB;
   }
   else
@@ -1079,20 +1079,20 @@ function changeSpeed()
 <table border=0 cellspacing=0 cellpadding=0>
 
 <tr><td>
-<font color=white>R0:</font><input type=text name=R0 size=16 maxlength=16 tabindex=1
+<font color=white>R0:</font><input type=text name=R0 size=18 maxlength=16 tabindex=1
                onfocus='if(!CHANGE_ENABLED) blur();'
                onchange='registerChange(0);'>
 </td></tr>
 <tr><td>
-<font color=white>R1:</font><input type=text name=R1 size=16 maxlength=16 tabindex=2
+<font color=white>R1:</font><input type=text name=R1 size=18 maxlength=16 tabindex=2
 	       onfocus='if(!CHANGE_ENABLED) blur();'
                onchange='registerChange(1);'>
 </td></tr>
-<tr><td><font color=white>R2:</font><input type=text name=R2 size=16 maxlength=16 tabindex=3
+<tr><td><font color=white>R2:</font><input type=text name=R2 size=18 maxlength=16 tabindex=3
                onfocus='if(!CHANGE_ENABLED) blur();'
                onchange='registerChange(2);'>
 </td></tr>
-<tr><td><font color=white>R3:</font><input type=text name=R3 size=16 maxlength=16 tabindex=4
+<tr><td><font color=white>R3:</font><input type=text name=R3 size=18 maxlength=16 tabindex=4
                onfocus='if(!CHANGE_ENABLED) blur();'
                onchange='registerChange(3);'>
 </td></tr>
@@ -1191,14 +1191,14 @@ function changeSpeed()
 <td>
 <table bgcolor=white border=2 cellpadding=1 cellspacing=1>
 <tr><td align=center><font color=blue><b>A Bus</b></font></td></tr>
-<tr><td><input type=text name=ABus size=16 maxlength=16
+<tr><td><input type=text name=ABus size=18 maxlength=16
             onfocus='blur();'>
 </td></tr></table>
 </td>
 <td>
 <table bgcolor=white border=2 cellpadding=1 cellspacing=1>
 <tr><td align=center><font color=blue><b>B Bus</b></font></td></tr>
-<tr><td><input type=text name=BBus size=16 maxlength=16
+<tr><td><input type=text name=BBus size=18 maxlength=16
             onfocus='blur();'>
 </td></tr></table>
 </td>
@@ -1211,7 +1211,7 @@ function changeSpeed()
 <tr><td colspan=3>
 <table width=75% bgcolor=white border=2 cellpadding=1 cellspacing=1>
 <tr><td align=center><font color=blue><b>C Bus</b></font></td></tr>
-<tr><td align=center><input type=text name=CBus size=16 maxlength=16
+<tr><td align=center><input type=text name=CBus size=18 maxlength=16
             onfocus='blur();'>
 </td></tr></table>
 </td></tr>
@@ -1252,7 +1252,7 @@ function changeSpeed()
     document.write(
       '<table bgcolor=white border=2 cellpadding=1 cellspacing=1>' +
       '<tr><td align=left valign=top>' +
-      '<input type=text name=MMBus size=16 maxlength=16 onfocus="blur();"></td></tr>' +
+      '<input type=text name=MMBus size=18 maxlength=16 onfocus="blur();"></td></tr>' +
       '<tr><td align=center><font color=blue><b>Main Memory Bus</b></font>' +
       '</td></tr></table>');
   }
@@ -1277,9 +1277,9 @@ function changeSpeed()
 <table width=100% border=2 bgcolor=white cellpadding=1 cellspacing=1>
 
 <tr>
-<td align=center>A:<input type=text size=16 maxlength=16 name=ALUA
+<td align=center>A:<input type=text size=18 maxlength=16 name=ALUA
               onfocus='blur();'></td>
-<td align=center>B:<input type=text size=16 maxlength=16 name=ALUB
+<td align=center>B:<input type=text size=18 maxlength=16 name=ALUB
               onfocus='blur();'></td>
 </tr>
 
@@ -1289,9 +1289,9 @@ function changeSpeed()
 
 <tr>
 <td valign=center>
-C:<input type=text size=16 maxlength=16 name=ALUC
+C:<input type=text size=18 maxlength=16 name=ALUC
       onfocus='blur();'><br>
-<input type=checkbox name=zero 
+<input type=checkbox name=zero
          onclick="document.datapath.zero.checked = !document.datapath.zero.checked">
 &nbsp;&nbsp; Zero<br>
 <input type=checkbox name=negative
@@ -1314,12 +1314,10 @@ C:<input type=text size=16 maxlength=16 name=ALUC
 </td>
 </tr>
 
-</table> 
+</table>
 <!-- End of the full page table -->
 
 </form>
 
 </body>
 </html>
-
-
