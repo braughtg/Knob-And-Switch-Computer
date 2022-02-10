@@ -35,7 +35,7 @@ function saveValues()
   for(i=0; i<=31; i++)
   {
     top.memoryValues[i] = memoryBaseTwoValues[i];
-    theType = getDataType("MM" + i);   
+    theType = getDataType("MM" + i);
     top.memoryTypes[i] = getDataType("MM" + i)
   }
 }
@@ -46,7 +46,7 @@ function getValues()
 // is restored to 0's.
 {
   var i;
- 
+
   if (!top.DATAPATH_LOADED)
     setTimeout('getValues()',100);
   else
@@ -59,12 +59,12 @@ function getValues()
         setDataType(top.memoryTypes[i],"MM" + i);
       }
       else
-      { 
+      {
         setValue("0000000000000000","MM" + i);
         setDataType(0,"MM" + i);
       }
     }
- 
+
     if (top.memorySaved != null)
     {
       setRWAddress(top.memoryRWAddress);
@@ -75,7 +75,7 @@ function getValues()
       setRWAddress("MM0");
       CURRENT_RW_ADDRESS = "MM0";
     }
-  } 
+  }
 }
 
 // ********************************************************
@@ -111,13 +111,13 @@ function getDataTypeIndex(theType)
     return 3;
   else if (theType == -1)
     return 4;
-  else 
+  else
     return 0;
 }
 
 // ***********************************************************
-// Event handlers for the fields, buttons and memus 
-// 
+// Event handlers for the fields, buttons and memus
+//
 
 function changeMemoryType(MMAddr)
 // One of the datatypes has been changed so update its display.
@@ -134,7 +134,7 @@ function trimString(theStr)
   atEnd = true;
 
   for (i=theStr.length-1; i >= 1; i--)
-  { 
+  {
     if (theStr.charAt(i) != ' ')
     {
       ignore = false;
@@ -146,7 +146,7 @@ function trimString(theStr)
     if (!ignore)
        newStr = theStr.charAt(i) + newStr;
   }
- 
+
   if (theStr.charAt(0) != ' ')
     newStr = theStr.charAt(0) + newStr;
 
@@ -161,7 +161,7 @@ function changeMemoryValue(MMAddr)
 
   theVal = trimString(document.memory[MMAddr].value.toUpperCase());
   document.memory[MMAddr].value = theVal;
-  
+
   theType = getDataType(MMAddr);
   if (theType == 0)
     theType = top.datapath.getNumberBase();
@@ -174,7 +174,7 @@ function changeMemoryValue(MMAddr)
      // We are in full machine mode.. if what was enetered in the memory
      // does not start with a digit or a 0 then try to interpret it as
      // an instruction.
-     if ((theVal.charAt(0) < '0' || theVal.charAt(0) > '9') && theVal.charAt(0) != '-') { 
+     if ((theVal.charAt(0) < '0' || theVal.charAt(0) > '9') && theVal.charAt(0) != '-') {
        document.memory["DType" + MMAddr].selectedIndex = getDataTypeIndex(-1);
        memoryBaseTwoValues[addr] = getOpcode(theVal);
      }
@@ -185,7 +185,7 @@ function changeMemoryValue(MMAddr)
        memoryBaseTwoValues[addr] = getOpcode(theVal);
      }
      else if (!validInstruction(theVal) && theType == -1)
-     { 
+     {
        document.memory[MMAddr].value = "ERR: " + theVal;
        memoryBaseTwoValues[addr] = "1111111111111111";
      }
@@ -208,9 +208,9 @@ function memoryFocus(MMAddr)
 }
 
 function changeRWAddress(MMAddr)
-// This function is only necessary to prevent the R/W 
-// address from changing while the simulation is 
-// running. 
+// This function is only necessary to prevent the R/W
+// address from changing while the simulation is
+// running.
 
 {
   if (!top.datapath.CHANGE_ENABLED)
@@ -250,7 +250,7 @@ function setDataType(theType,MMAddr)
 
   if (MMAddr == null)
     MMAddr = getRWAddress();
-  
+
   document.memory["DType" + MMAddr].selectedIndex = getDataTypeIndex(theType);
 
   addr = MMAddr.substring(2,MMAddr.length);
@@ -280,7 +280,7 @@ function getValue(MMAddr)
 
 function setValue(baseTwoVal, MMAddr)
 // Set the value of the specified memory address.  The proper equivalent
-// of the baseTwoVal displayed.  If no memory address is specified use 
+// of the baseTwoVal displayed.  If no memory address is specified use
 // the currently selected memory address.
 {
   var theType, addr;
@@ -345,7 +345,7 @@ function getNumberBase()
 <script>
 for (i=0; i<=31; i++)
 {
-  document.write('<tr><td><select name=DTypeMM' + i + 
+  document.write('<tr><td><select name=DTypeMM' + i +
                  ' onchange="changeMemoryType(\'MM' + i + '\');">' +
                  '<option value=0>Auto' +
                  '<option value=-10>+-10' +
@@ -357,13 +357,13 @@ for (i=0; i<=31; i++)
 
   document.write('</select></td>');
 
-  document.write('<td align=right>' + 
+  document.write('<td align=right>' +
                  getNumber(i,10,Math.abs(getNumberBase()),5) + ':</td>');
-  document.write('<td><input type=text name=MM'+ i + 
-                 ' size=16 maxlength=16 tabindex=' + (i+1) + 
+  document.write('<td><input type=text name=MM'+ i +
+                 ' size=17 maxlength=16 tabindex=' + (i+1) +
                  ' onfocus="if(!top.datapath.CHANGE_ENABLED) blur(); else memoryFocus(\'MM' + i + '\');"' +
                  ' onchange="changeMemoryValue(\'MM' + i + '\');"' +
-                 ' onblur="memoryBlur(\'MM' + i + '\');"></td>' + 
+                 ' onblur="memoryBlur(\'MM' + i + '\');"></td>' +
                  '<td><input type=radio name=MMSelect value=MM' + i +
                  ' onClick="changeRWAddress(\'MM' + i + '\');"></td></tr>');
 }
@@ -375,7 +375,7 @@ for (i=0; i<=31; i++)
 <!-- This chunk allows a local file to be read and stored into the memory -->
 <br><br>
 <hr>
-Choose ML File: 
+Choose ML File:
 <input id="file" type="file" \>
 <br>
 <hr>
@@ -403,7 +403,7 @@ filesInput.addEventListener("change", function (event) {
 	for (i=array.length-1; i<=31; i++) {
 		top.memoryValues[i] = "0000000000000000";
 	}
-	
+
 	getValues();
     });
     reader.readAsText(file);

@@ -35,7 +35,7 @@ function clearPC()
 }
 
 function getPC()
-{ 
+{
   return "MM" + getNumber(document.microprog.PC.value,Math.abs(getCUNumberBase()),10,5);
 }
 
@@ -92,7 +92,7 @@ function setTransArrowsRed()
 function takeBranch()
 {
   var key;
- 
+
   key = getInstruction(IR_VALUE).substring(0,2);
 
   return ((key == 'BR') ||
@@ -128,7 +128,7 @@ function setNewMicroIR()
 
   key = getInstruction(IR_VALUE).substring(0,2);
 
-  if      (key == "LO")		
+  if      (key == "LO")
     setMicroIR("00","00", IR_VALUE.substring(9,11), "00", IR_VALUE.substring(11,16), "1010");
   else if (key == "ST")
     setMicroIR(IR_VALUE.substring(9,11),IR_VALUE.substring(9,11),"00", "01", IR_VALUE.substring(11,16),"0101");
@@ -143,7 +143,7 @@ function setNewMicroIR()
   else if (key == "OR")
     setMicroIR(IR_VALUE.substring(12,14),IR_VALUE.substring(14,16),IR_VALUE.substring(10,12),"01","00000","1001");
   else
-    setMicroIR("00","00","00","00","00000","0000"); 
+    setMicroIR("00","00","00","00","00000","0000");
 }
 
 function getCUNumberBase()
@@ -191,7 +191,7 @@ function CUBaseChange()
 <td><font color=green>ALU Op:</font></td>
 <td><font color=green>Switch Pos:</font></td>
 <td><font color=green>C Addr:</font></td>
-<td><font color=green>RW Addr:</font></td> 
+<td><font color=green>RW Addr:</font></td>
 </tr>
 <tr>
 <td><input type=text size=2 maxlength=2 name=AAddr0
@@ -255,7 +255,7 @@ function CUBaseChange()
 <td colspan=2 align=right>
 <table width=100% border=2 bgcolor=white cellspacing=1 cellpadding=1>
 <tr><td>
-<font color=green>IR:</font><input type=text size=16 maxlength=16 name=IR
+<font color=green>IR:</font><input type=text size=17 maxlength=16 name=IR
            onfocus='blur();'>
 </td></tr>
 </table>
@@ -267,4 +267,3 @@ function CUBaseChange()
 </form>
 </body>
 </html>
-
